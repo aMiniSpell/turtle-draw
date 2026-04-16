@@ -16,9 +16,9 @@ TEXTFILE = input("Enter the file you want read: ")
 
 steven = turtle.Turtle()
 screen = turtle.Screen()
-root = screen.getcanvas().winfo_toplevel()
-root.attributes('-topmost', True)
-root.attributes('-topmost', False)
+root = screen.getcanvas().winfo_toplevel() # Forces turtle to top application om screen
+root.attributes('-topmost', True) # Puts on top as soon as it runs
+root.attributes('-topmost', False) # Prevents app from being locked in front of others
 screen.setup(width = 450, height = 450)
 steven.speed(0)
 steven.penup()
@@ -26,7 +26,6 @@ steven.penup()
 
 try:
     turtleDrawTextfile = open(TEXTFILE, 'r') # 'r' = read mode
-    #with open(TEXTFILE, 'r') as file:
     print(f"\n---Contents of {TEXTFILE} ---")
         
 except FileNotFoundError:
@@ -51,12 +50,14 @@ while line:
     if (len(parts) == 1): # assumes one input is stop
         steven.penup()
 
-    line = turtleDrawTextfile.readline()
+    line = turtleDrawTextfile.readline() # reads the next line in the loop
 
 # Todo: print the total distance near the bottom right
+
+# Allows user to press 'enter' to close turtle
+screen.onkey(turtle.bye, "Return")
+screen.listen()
 turtle.done()
+
 turtleDrawTextfile.close()
-
-# Todo: wait for the user to press the enter key to terminate
-
 print('\nEnd')
