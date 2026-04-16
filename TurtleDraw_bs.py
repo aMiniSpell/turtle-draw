@@ -9,6 +9,7 @@ Gemini CLI utilized for troubleshooting
 """
 import turtle
 import sys
+import math
 
 print('Starting TurtleDraw...')
 
@@ -33,6 +34,7 @@ except FileNotFoundError:
     sys.exit()
 
 line = turtleDrawTextfile.readline()
+d_total = 0
 while line:
     print(line, end='') # just prints the text file in terminal
     parts = line.split() 
@@ -41,18 +43,25 @@ while line:
         color = parts[0]
         x = int(parts[1])
         y = int(parts[2])
+        if steven.isdown():
+            d_total += steven.distance(x,y) # shorthand for adding current distance with the next one
 
-        steven.color(color) # make better
+        steven.color(color)
         steven.goto(x,y)
-    # Todo: need to calculate total distance when we draw
         steven.pendown()
 
-    if (len(parts) == 1): # assumes one input is stop
+    else:
+        (len(parts) == 1) # assumes one input is stop
         steven.penup()
 
     line = turtleDrawTextfile.readline() # reads the next line in the loop
 
-# Todo: print the total distance near the bottom right
+# Moves to write the total distance without drawing to that point
+steven.penup()
+steven.goto(55,-180)
+steven.write(f"Total Distance Drawn: {d_total:.2f}")
+# removes cursor to see image clearly
+steven.hideturtle()
 
 # Allows user to press 'enter' to close turtle
 screen.onkey(turtle.bye, "Return")
