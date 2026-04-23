@@ -10,8 +10,8 @@ Gemini CLI utilized for troubleshooting
 import turtle
 import sys
 import math
+import os
 
-print('Starting TurtleDraw...')
 
 TEXTFILE = input("Enter the file you want read: ")
 
